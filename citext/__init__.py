@@ -10,6 +10,10 @@ __version__ = '1.8.0'
 
 
 class CIText(types.Concatenable, types.UserDefinedType):
+    # Tell SQLAlchemy that CIText strings are safe to use as cache keys (like regular strings)
+    # https://docs.sqlalchemy.org/en/14/core/custom_types.html#sqlalchemy.types.TypeDecorator.cache_ok
+    cache_ok = True
+    
     # This is copied from the `literal_processor` of sqlalchemy's own `String`
     # type.
     def literal_processor(self, dialect):
